@@ -16,11 +16,16 @@ public class Player : MonoBehaviour
         // transform.position += moveTo * moveSpeed * Time.deltaTime;
 
         // 방법 2
-        Vector3 moveTo = new Vector3(moveSpeed * Time.deltaTime, 0f, 0f);
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            transform.position -= moveTo;
-        } else if ( Input.GetKey(KeyCode.RightArrow)) {
-            transform.position += moveTo;
-        }
+        // Vector3 moveTo = new Vector3(moveSpeed * Time.deltaTime, 0f, 0f);
+        // if (Input.GetKey(KeyCode.LeftArrow)) {
+        //     transform.position -= moveTo;
+        // } else if ( Input.GetKey(KeyCode.RightArrow)) {
+        //     transform.position += moveTo;
+        // }
+
+        // 방법 3 
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float toX = Mathf.Clamp(mousePos.x , -2.35f, 2.35f);
+        transform.position = new Vector3(toX, transform.position.y, transform.position.z);
     }
 }
