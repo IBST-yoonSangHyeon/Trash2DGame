@@ -13,6 +13,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform shootTransform; // shootTransform 객체 위치 변수 
     // Update is called once per frame
+
+    [SerializeField]
+    private float shootInterval = 0.05f; // 0.05초 마다 미사일 속도
+
+    private float lastShootTime = 0f; // 최근에 쏜 미사일 시간대
+
     void Update()
     {
         // 방법 1
@@ -39,6 +45,9 @@ public class Player : MonoBehaviour
     }
 
     void Shoot() {
-        Instantiate(weapon, shootTransform.position, Quaternion.identity);
+        if (Time.time - lastShootTime > shootInterval) {
+            Instantiate(weapon, shootTransform.position, Quaternion.identity);
+            lastShootTime = Time.time;
+        }
     }
 }
